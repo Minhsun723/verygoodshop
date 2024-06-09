@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateCartCount = () => {
         const cartCount = document.getElementById('cart-count');
-        cartCount.textContent = cart.length;
+        if (cartCount) {
+            cartCount.textContent = cart.length;
+        }
     };
 
     const addToCart = (product) => {
@@ -12,12 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
     };
 
+    const calculateTotalPrice = () => {
+        let totalPrice = 0;
+        cart.forEach(item => {
+            totalPrice += parseFloat(item.price);
+        });
+        return totalPrice.toFixed(2);
+    };
+
     const renderCartItems = () => {
         const cartItemsContainer = document.getElementById('cart-items');
+        const checkoutButton = document.getElementById('checkout');
         cartItemsContainer.innerHTML = '';
 
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p>您的購物車目前是空的。</p>';
+            if (checkoutButton) {
+                checkoutButton.disabled = true;
+            }
         } else {
             cart.forEach((item, index) => {
                 const itemElement = document.createElement('div');
@@ -39,8 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('cart', JSON.stringify(cart));
                     renderCartItems();
                     updateCartCount();
+                    updateTotalPrice();
                 });
             });
+
+            if (checkoutButton) {
+                checkoutButton.disabled = false;
+            }
+        }
+    };
+
+    const updateTotalPrice = () => {
+        const totalPriceContainer = document.getElementById('total-price');
+        if (totalPriceContainer) {
+            totalPriceContainer.textContent = `總金額：$${parseInt(calculateTotalPrice())}`;
         }
     };
 
@@ -50,10 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const product = {
                 id: productElement.getAttribute('data-id'),
                 name: productElement.getAttribute('data-name'),
-                price: productElement.getAttribute('data-price'),
+                price: parseFloat(productElement.getAttribute('data-price')),
                 image: productElement.querySelector('img').src
             };
             addToCart(product);
+            updateTotalPrice();
         });
     });
 
@@ -63,13 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('cart', JSON.stringify(cart));
             renderCartItems();
             updateCartCount();
+            updateTotalPrice();
         });
     }
 
-    // 初始化購物車數量
-    updateCartCount();
+    if (document.getElementById('checkout')) {
+        document.getElementById('checkout').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+    }
 
-    // 如果在購物車頁面，渲染購物車項目
+    // 初始化購物車數量和總金額
+    updateCartCount();
+    updateTotalPrice();
+
+    // 如果在購物車頁面，渲染購物車項目和總金額
     if (document.getElementById('cart-items')) {
         renderCartItems();
     }
@@ -78,9 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelector('.slides');
     const slideCount = slides.children.length;
     let currentIndex = 0;
-    
+
     // 創建指示器
     const indicators = document.querySelector('.slider-indicators');
+    indicators.innerHTML = '';
     for (let i = 0; i < slideCount; i++) {
         const indicator = document.createElement('span');
         indicator.setAttribute('data-slide', i);
@@ -112,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSlide = (index) => {
         slides.style.transform = `translateX(-${index * 100}%)`;
 
-        // 更新指示器狀態
         const indicators = document.querySelectorAll('.slider-indicators span');
         indicators.forEach((indicator, i) => {
             if (i === index) {
@@ -122,4 +157,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('結帳功能暫未開通。');
+        });
+
+        const paymentMethods = document.querySelectorAll('input[name="payment"]');
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', (event) => {
+                const creditCardInfo = document.querySelector('.credit-card-info');
+                if (event.target.value === 'credit-card') {
+                    creditCardInfo.style.display = 'block';
+                } else {
+                    creditCardInfo.style.display = 'none';
+                }
+            });
+        });
+
+        // 初始隱藏或顯示信用卡信息
+        const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        const creditCardInfo = document.querySelector('.credit-card-info');
+        if (selectedPaymentMethod === 'credit-card') {
+            creditCardInfo.style.display = 'block';
+        } else {
+            creditCardInfo.style.display = 'none';
+        }
+    }
 });
