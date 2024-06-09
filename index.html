@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易購物平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 onclick="window.location.href='index.html'">簡易購物平台</h1>
+        <nav>
+            <ul>
+                <li><a href="login.html">登入</a></li>
+                <li><a href="shop.html">購物</a></li>
+                <li><a href="cart.html">購物車 (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- 新增圖片輪播 -->
+        <div class="slider">
+            <div class="slides">
+                <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1">
+                <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2">
+                <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3">
+                <img src="https://via.placeholder.com/800x400?text=Slide+4" alt="Slide 4">
+            </div>
+            <div class="slider-buttons">
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+            <div class="slider-indicators">
+                <span class="active" data-slide="0"></span>
+                <span data-slide="1"></span>
+                <span data-slide="2"></span>
+            </div>
+        </div>
+
+        <h2>熱門商品</h2>
+        <div class="products">
+            <!-- 商品列表 -->
+            <div class="product" data-id="1" data-name="商品 1" data-price="100">
+                <h3>商品 1</h3>
+                <p>商品描述</p>
+                <p>價格: $100</p>
+                <button class="add-to-cart">加入購物車</button>
+            </div>
+            <div class="product" data-id="2" data-name="商品 2" data-price="200">
+                <h3>商品 2</h3>
+                <p>商品描述</p>
+                <p>價格: $200</p>
+                <button class="add-to-cart">加入購物車</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 簡易購物平台</p>
+    </footer>
+</body>
+</html>
