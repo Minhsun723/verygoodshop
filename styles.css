@@ -209,3 +209,34 @@ button:hover {
     height: auto; /* 讓圖片的高度自動調整以保持比例 */
     object-fit: cover; /* 調整圖片大小以填滿容器，可能會裁切圖片 */
 }
+
+/* Checkout page styles */
+.checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.checkout-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    margin-bottom: 10px;
+}
+
+.credit-card-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.credit-card-info label,
+.credit-card-info input {
+    margin-bottom: 5px;
+}
+
