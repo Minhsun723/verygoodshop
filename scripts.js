@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutForm.addEventListener('submit', (event) => {
             event.preventDefault();
             alert('結帳功能暫未開通。');
+            window.location.href = 'checkout_success.html';
         });
 
         const paymentMethods = document.querySelectorAll('input[name="payment"]');
