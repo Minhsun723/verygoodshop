@@ -240,3 +240,15 @@ button:hover {
     margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 600px) {
+    /* 螢幕寬度小於等於 600px 時應用的樣式 */
+    .products {
+        flex-direction: column; /* 將商品列表排列為一列 */
+        align-items: center; /* 將商品置中 */
+    }
+
+    .product {
+        width: 80%; /* 調整商品的寬度 */
+    }
+}
+
