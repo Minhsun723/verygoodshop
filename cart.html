@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>購物車 - 非常好購物</title>
-    <link rel="icon" type="image/x-icon" href="bag.png">
+    <title>購物車 - 簡易購物平台</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <h1 onclick="window.location.href='index.html'">非常好購物</h1>
+        <h1 onclick="window.location.href='index.html'">簡易購物平台</h1>
         <nav>
             <ul>
                 <li><a href="login.html">登入</a></li>
@@ -22,14 +21,16 @@
     <main>
         <div class="cart-header">
             <h2>您的購物車</h2>
+            <p id="total-price">總金額：$0</p>
             <button id="clear-cart">清空購物車</button>
+            <button id="checkout" disabled>前往結帳</button>
         </div>
         <div id="cart-items">
             <p>您的購物車目前是空的。</p>
         </div>
     </main>
     <footer>
-        <p>&copy;2024 ACS11208 蔡旻勳</p>
+        <p>&copy; 2024 ACS112108 蔡旻勳</p>
     </footer>
 </body>
 </html>
