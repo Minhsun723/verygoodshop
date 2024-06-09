@@ -172,3 +172,15 @@ button:hover {
 .slider-indicators span.active {
     background-color: rgba(255, 255, 255, 1);
 }
+
+.product-image {
+    width: 200px; /* 調整圖片容器的寬度 */
+    height: 100px; /* 調整圖片容器的高度 */
+    overflow: hidden; /* 確保圖片不會超出容器 */
+}
+
+.product-image img {
+    width: 100%; /* 讓圖片填滿其容器 */
+    height: auto; /* 讓圖片的高度自動調整以保持比例 */
+    object-fit: cover; /* 調整圖片大小以填滿容器，可能會裁切圖片 */
+}
