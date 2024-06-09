@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const itemElement = document.createElement('div');
                 itemElement.className = 'cart-item';
                 itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
                     <h3>${item.name}</h3>
                     <p>價格: $${item.price}</p>
                     <button class="remove-from-cart" data-index="${index}">移除</button>
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: productElement.getAttribute('data-id'),
                 name: productElement.getAttribute('data-name'),
                 price: productElement.getAttribute('data-price'),
+                image: productElement.querySelector('img').src
             };
             addToCart(product);
         });
