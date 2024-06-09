@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結帳頁面</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>結帳頁面</h1>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <h2>選擇付款方式</h2>
+            <p id="total-price">總金額：$0</p>
+            <form id="checkout-form">
+                <div class="payment-method">
+                    <input type="radio" id="credit-card" name="payment" value="credit-card" checked>
+                    <label for="credit-card">信用卡</label>
+                </div>
+                <div class="credit-card-info">
+                    <label for="cc-number">信用卡號碼：</label>
+                    <input type="text" id="cc-number" name="cc-number" required>
+                    <label for="cc-expiration">有效日期：</label>
+                    <input type="text" id="cc-expiration" name="cc-expiration" required>
+                    <label for="cc-cvv">安全碼：</label>
+                    <input type="text" id="cc-cvv" name="cc-cvv" required>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="apple-pay" name="payment" value="apple-pay">
+                    <label for="apple-pay"><img src="applepay.png" alt="ApplePay" style="height: 53px; width: 83px;"></label>
+                    
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="google-pay" name="payment" value="google-pay">
+                    <label for="google-pay"><img src="googlepay.png" alt="GooglePay" style="height: 50px; width: 100px;"></label>
+                </div>
+                <button type="submit">結帳</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>這裡是頁面底部的橫幅</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
