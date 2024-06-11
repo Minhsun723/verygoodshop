@@ -8,10 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const addToCart = (product) => {
+    const addToCart = (item, product) => {
         cart.push(product);
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
+        showAlert(`${item.name}`);
     };
 
     const calculateTotalPrice = () => {
@@ -69,6 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
             totalPriceContainer.textContent = `總金額：$${parseInt(calculateTotalPrice())}`;
         }
     };
+
+    const showAlert = (productName) => {
+        const alertBox = document.createElement('div');
+        alertBox.className = 'alert';
+        alertBox.textContent = `${productName} 已加入購物車！`;
+        document.body.appendChild(alertBox);
+
+        // 設定3秒後自動移除提示框
+        setTimeout(() => {
+            alertBox.remove();
+        }, 1000);
+    };
+
 
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
