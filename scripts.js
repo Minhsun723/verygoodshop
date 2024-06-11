@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 導航到結帳成功頁面
             window.location.href = 'checkout_success.html';
+            localStorage.removeItem('cart');
         });
 
         const creditCardInfo = document.querySelector('.credit-card-info');
