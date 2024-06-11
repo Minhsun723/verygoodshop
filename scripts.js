@@ -157,34 +157,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-
+});
+document.addEventListener('DOMContentLoaded', () => {
     const checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            alert('結帳功能暫未開通。');
+            event.preventDefault(); // 防止表單的默認提交行為
+            alert('結帳功能暫未開通，僅為示範。'); // 暫時顯示警示框，您可以在開通結帳功能後刪除此行
+
+            // 導航到結帳成功頁面
             window.location.href = 'checkout_success.html';
         });
+
+        const creditCardInfo = document.querySelector('.credit-card-info');
+        const creditCardInputs = creditCardInfo.querySelectorAll('input');
 
         const paymentMethods = document.querySelectorAll('input[name="payment"]');
         paymentMethods.forEach(method => {
             method.addEventListener('change', (event) => {
-                const creditCardInfo = document.querySelector('.credit-card-info');
                 if (event.target.value === 'credit-card') {
-                    creditCardInfo.style.display = 'block';
+                    creditCardInfo.style.display = 'flex';
+                    creditCardInputs.forEach(input => input.setAttribute('required', 'required'));
                 } else {
                     creditCardInfo.style.display = 'none';
+                    creditCardInputs.forEach(input => input.removeAttribute('required'));
                 }
             });
         });
 
-        // 初始隱藏或顯示信用卡信息
-        const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked').value;
-        const creditCardInfo = document.querySelector('.credit-card-info');
-        if (selectedPaymentMethod === 'credit-card') {
-            creditCardInfo.style.display = 'block';
-        } else {
+        // 初始隱藏信用卡信息
+        const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked');
+        if (selectedPaymentMethod && selectedPaymentMethod.value !== 'credit-card') {
             creditCardInfo.style.display = 'none';
+            creditCardInputs.forEach(input => input.removeAttribute('required'));
+        } else {
+            creditCardInputs.forEach(input => input.setAttribute('required', 'required'));
         }
     }
 });
