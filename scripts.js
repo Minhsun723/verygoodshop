@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const addToCart = (item, product) => {
+    const addToCart = (product) => {
         cart.push(product);
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        showAlert(`${item.name}`);
+        showAlert('商品已加入購物車！');
     };
 
     const calculateTotalPrice = () => {
@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const showAlert = (productName) => {
+    const showAlert = (message) => {
         const alertBox = document.createElement('div');
         alertBox.className = 'alert';
-        alertBox.textContent = `${productName} 已加入購物車！`;
+        alertBox.textContent = message;
         document.body.appendChild(alertBox);
 
         // 設定3秒後自動移除提示框
