@@ -4,12 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCartCount = () => {
         const cartCount = document.getElementById('cart-count');
         if (cartCount) {
-            cartCount.textContent = cart.length;
+            cartCount.textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
         }
     };
 
     const addToCart = (product) => {
-        cart.push(product);
+        const existingProductIndex = cart.findIndex(item => item.id === product.id);
+        if (existingProductIndex !== -1) {
+            cart[existingProductIndex].quantity++;
+        } else {
+            cart.push(product);
+        }
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         showAlert('商品已加入購物車!');
@@ -18,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculateTotalPrice = () => {
         let totalPrice = 0;
         cart.forEach(item => {
-            totalPrice += parseFloat(item.price);
+            totalPrice += parseFloat(item.price) * item.quantity;
         });
         return totalPrice.toFixed(2);
     };
@@ -40,10 +45,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemElement.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
                     <h3>${item.name}</h3>
-                    <p>價格: $${item.price}</p>
+                    <p>價格: $${parseInt((item.price * item.quantity))}</p>
+                    <div class="quantity">
+                        <button class="decrease" data-index="${index}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="increase" data-index="${index}">+</button>
+                    </div>
                     <button class="remove-from-cart" data-index="${index}">移除</button>
                 `;
                 cartItemsContainer.appendChild(itemElement);
+            });
+
+            const decreaseButtons = document.querySelectorAll('.decrease');
+            decreaseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const index = button.getAttribute('data-index');
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity--;
+                    } else {
+                        removeFromCart(index);
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCartItems();
+                    updateTotalPrice();
+                    updateCartCount();
+                });
+            });
+
+            const increaseButtons = document.querySelectorAll('.increase');
+            increaseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const index = button.getAttribute('data-index');
+                    cart[index].quantity++;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCartItems();
+                    updateTotalPrice();
+                    updateCartCount();
+                });
             });
 
             const removeButtons = document.querySelectorAll('.remove-from-cart');
@@ -91,7 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: productElement.getAttribute('data-id'),
                 name: productElement.getAttribute('data-name'),
                 price: parseFloat(productElement.getAttribute('data-price')),
-                image: productElement.querySelector('img').src
+                image: productElement.querySelector('img').src,
+                quantity: 1
             };
             addToCart(product);
             updateTotalPrice();
