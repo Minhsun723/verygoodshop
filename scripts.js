@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.push(product);
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        showAlert('商品已加入購物車！');
+        showAlert('商品已加入購物車!');
     };
 
     const calculateTotalPrice = () => {
