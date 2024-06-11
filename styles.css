@@ -57,20 +57,25 @@ main {
 
 .products {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* 調整商品之間的間距 */
+    justify-content: center;
+    gap: 20px;
     transition: transform 0.5s ease;
 }
 
 .product {
-    flex: 1 1 calc(25% - 10px); /* 每個商品佔一行的四分之一，減去間距 */
-    box-sizing: border-box;
-    border: 1px solid #ddd;
+    background-color: white;
     padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    width: 200px;
     text-align: center;
     transition: transform 0.3s ease;
+}
+
+.shop-products {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    gap: 50px;
+    justify-content: center;
 }
 
 .product h3 {
