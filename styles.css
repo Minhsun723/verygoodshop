@@ -266,13 +266,48 @@ button:hover {
 
 @media only screen and (max-width: 600px) {
     /* 螢幕寬度小於等於 600px 時應用的樣式 */
+    
+    /* 調整商品列表樣式 */
     .shop-products {
+        grid-template-columns: 1fr; /* 將商品列表排列為一列 */
+        gap: 20px; /* 商品間距 */
+        justify-items: center;
+    }
+
+    .products {
         flex-direction: column; /* 將商品列表排列為一列 */
         align-items: center; /* 將商品置中 */
     }
 
     .product {
         width: 80%; /* 調整商品的寬度 */
+    }
+    
+    /* 調整購物車樣式 */
+    .cart-item {
+        flex-direction: column; /* 將購物車項目排列為一列 */
+        align-items: center; /* 將購物車項目置中 */
+        text-align: center; /* 將文字置中 */
+    }
+
+    .cart-item img {
+        width: 80px; /* 調整圖片大小 */
+        height: 80px; /* 調整圖片大小 */
+        margin-bottom: 10px; /* 增加下邊距 */
+    }
+
+    .cart-item h3, .cart-item p {
+        margin: 5px 0; /* 調整文字上下邊距 */
+    }
+
+    .quantity-controls {
+        flex-direction: row; /* 將加減器排列為一行 */
+        justify-content: center; /* 將加減器置中 */
+    }
+
+    .quantity-controls button {
+        width: 30px; /* 調整加減器按鈕寬度 */
+        height: 30px; /* 調整加減器按鈕高度 */
     }
 }
 
