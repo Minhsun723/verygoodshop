@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 設定3秒後自動移除提示框
         setTimeout(() => {
             alertBox.remove();
-        }, 1000);
+        }, 2000);
     };
 
 
